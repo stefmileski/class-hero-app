@@ -1,0 +1,257 @@
+/*
+ * Class Hero — app shell, typographic primitives and shared components.
+ *
+ * The prototype carried exact values in inline styles; they are preserved
+ * verbatim here as named classes. Where the prototype hard-coded a pixel
+ * height for a full-bleed image, this uses the equivalent aspect-ratio so the
+ * crop holds at any width (identical at the 402px design width).
+ */
+
+/* ── Shell ─────────────────────────────────────────────────────────────── */
+
+.app {
+  position: relative;
+  height: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+/* Screens scroll under an absolutely positioned tab bar, as in the prototype:
+   58px of status-bar clearance becomes the real safe-area inset, and 104px of
+   bottom padding clears the 100px bar with 4px to spare. */
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--safe-top);
+  padding-bottom: calc(104px + var(--safe-bottom));
+  animation: ch-rise var(--t-screen) var(--ease);
+}
+
+.screen--no-tabs {
+  padding-bottom: var(--safe-bottom);
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* ── Type ──────────────────────────────────────────────────────────────── */
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+/* Structural label, ink. 10px / .3em, uppercase. */
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.eyebrow--ash {
+  color: var(--ash);
+}
+
+.eyebrow--faint {
+  color: var(--faint);
+}
+
+/* Header actions: Close, Back, Cancel, Send. */
+.nav-action {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+.nav-action--ink {
+  color: var(--ink);
+}
+
+/* Row heading inside a list. */
+.row-title {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+/* Wider-tracked row heading (Tomorrow, Vault consent). */
+.item-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.body {
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--graphite);
+}
+
+.body-sm {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--graphite);
+}
+
+.meta {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ash);
+}
+
+/* ── Rules and status ──────────────────────────────────────────────────── */
+
+.rule {
+  height: 1px;
+  background: var(--hairline);
+}
+
+/* Colour only ever appears as a line. 34×2px, right-aligned in a row. */
+.status-line {
+  width: 34px;
+  height: 2px;
+  flex: none;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+
+.btn-ink {
+  display: block;
+  width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 19px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.btn-outline {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--ink);
+  padding: 18px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ── Image placeholders ────────────────────────────────────────────────── */
+
+.slot {
+  background: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slot__caption {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* Vault and profile grids: three squares, 1px gutters, edge to edge. */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--hairline-grid);
+}
+
+.photo-grid .slot {
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+/* ── Consent toggle ────────────────────────────────────────────────────── */
+
+.toggle {
+  position: relative;
+  width: 52px;
+  height: 26px;
+  flex: none;
+  border: 1px solid var(--ink);
+  border-radius: 13px;
+  padding: 0 3px;
+  background: var(--paper);
+  transition: background var(--t-toggle) var(--ease);
+}
+
+.toggle[aria-checked='true'] {
+  background: var(--ink);
+}
+
+.toggle__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition:
+    transform var(--t-toggle) var(--ease),
+    background var(--t-toggle) var(--ease);
+}
+
+.toggle[aria-checked='true'] .toggle__knob {
+  background: var(--paper);
+  transform: translateX(26px);
+}
+
+/* ── Tab bar ───────────────────────────────────────────────────────────── */
+
+.tabbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+  padding: 18px 22px calc(30px + var(--safe-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  width: 52px;
+  color: var(--ash);
+}
+
+.tab--active {
+  color: var(--ink);
+}
+
+.tab__label {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* The couture accent: the plus glyph inside a 34px hairline square. */
+.tab__add {
+  width: 34px;
+  height: 34px;
+  border: 1px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

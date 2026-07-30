@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#E9E5DF;-webkit-font-smoothing:antialiased}
+a{color:#0E0E0E}a:hover{color:#8C8781}
+@keyframes chRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes chCurtain{from{transform:translateY(100%)}to{transform:none}}
+</style>
+</helmet>
+
+<div style="font-family:Jost,system-ui,sans-serif;color:#0E0E0E;padding:64px;display:flex;gap:72px;align-items:flex-start">
+
+  <div style="width:380px;display:flex;flex-direction:column;gap:40px;position:sticky;top:64px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#8C8781">Class Hero · Tappable mockup</div>
+      <div style="font-family:'Bodoni Moda',serif;font-size:46px;line-height:1">Ten screens,<br>one bottom bar</div>
+      <div style="font-size:14px;line-height:1.7;color:#4A4844;font-weight:300;text-wrap:pretty">Instagram's interaction grammar — feed, stories rail, 3-up grid, five-tab bar, full-screen viewer — drawn in the house style: monochrome, hairline rules, Didone display, cropped imagery, and a great deal of nothing.</div>
+      <div style="font-size:14px;line-height:1.7;color:#4A4844;font-weight:300;text-wrap:pretty">Tap the bar to move between the five destinations. Tap a circle on the feed to open <span style="color:#0E0E0E">Stories</span> — timed full-screen notices from the school, canteen, uniform shop and each class. It advances itself, swipe or tap across for the next, swipe down to return to the feed, and the last one hands you back to the feed. Rings go from ink to hairline once seen.</div>
+      <div style="font-size:14px;line-height:1.7;color:#4A4844;font-weight:300;text-wrap:pretty">The other signature moment is <span style="color:#0E0E0E">Photo Consent</span> in the Vault: withheld by default, every image of your child blurred everywhere until you grant it.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#8C8781">Screen index</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="10">
+          <div onClick="{{ c.go }}" style="cursor:pointer;padding:9px 13px;border:1px solid rgba(14,14,14,.16);font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:{{ c.bg }};color:{{ c.fg }}" style-hover="border-color:#0E0E0E">{{ c.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(14,14,14,.16);padding-top:24px">
+      <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#8C8781">Next steps</div>
+      <div style="font-size:13px;line-height:1.8;color:#4A4844;font-weight:300">Drop real photography onto any grey slot · variations for feed card, tab bar, type and vault live in the Variations file · say the word and I'll add empty states, notifications and the school-side view.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:44px;align-items:flex-start">
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+    <div style="position:relative;width:100%;height:100%;background:#FFFFFF;overflow:hidden">
+
+      <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding:132px 32px 120px;display:flex;flex-direction:column;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center">
+            <div style="font-family:'Bodoni Moda',serif;font-size:40px;line-height:1;letter-spacing:.02em">CLASS HERO</div>
+            <div style="font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#8C8781">School, quietly handled</div>
+          </div>
+          <div style="height:1px;background:rgba(14,14,14,.14);margin:56px 0 48px"></div>
+          <div style="display:flex;flex-direction:column;gap:36px">
+            <div style="display:flex;flex-direction:column;gap:10px;border-bottom:1px solid rgba(14,14,14,.3);padding-bottom:10px">
+              <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">School</div>
+              <div style="font-size:16px;font-weight:300">Northbridge Primary</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;border-bottom:1px solid rgba(14,14,14,.16);padding-bottom:10px">
+              <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Invitation code</div>
+              <div style="font-size:16px;font-weight:300;color:#C9C4BC;letter-spacing:.3em">— — — —</div>
+            </div>
+          </div>
+          <div style="flex:1"></div>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div onClick="{{ goFeed }}" style="cursor:pointer;background:#0E0E0E;color:#fff;padding:19px;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase">Request access</div>
+            <div style="text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8C8781">My school is not listed</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isFeed }}" hint-placeholder-val="{{ true }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 16px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="width:22px"></div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:19px;letter-spacing:.14em">CLASS HERO</div>
+            <div onClick="{{ goCommunity }}" style="cursor:pointer;display:flex;align-items:center">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#0E0E0E" stroke-width="1"><path d="M2.5 4.5h17v12h-11l-6 4.5v-4.5z"></path></svg>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;padding:20px 20px 22px;overflow-x:auto;border-bottom:1px solid rgba(14,14,14,.1)">
+            <sc-for list="{{ rails }}" as="r" hint-placeholder-count="6">
+              <div onClick="{{ r.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:9px;align-items:center;flex:none">
+                <div style="width:58px;height:58px;border-radius:50%;background:#F4F1EC;display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:17px;color:#0E0E0E;border:1px solid {{ r.ring }};outline:{{ r.outline }};outline-offset:4px">{{ r.monogram }}</div>
+                <div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:{{ r.labelColor }}">{{ r.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="padding:30px 20px 26px;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">Northbridge Primary</div>
+              <div style="font-size:11px;color:#8C8781;letter-spacing:.1em">2d</div>
+            </div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:30px;line-height:1.12">Book Week Parade</div>
+            <div style="font-size:14px;line-height:1.7;font-weight:300;color:#4A4844">Friday, 8.40 in the hall. A character from a book. No superheroes.</div>
+          </div>
+          <div style="height:452px;background:#F4F1EC"><image-slot id="ch-feed-1" shape="rect" placeholder="Book Week · 4:5"></image-slot></div>
+          <div style="display:flex;gap:26px;padding:18px 20px;border-bottom:1px solid rgba(14,14,14,.1);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844">
+            <div style="cursor:pointer">Save</div><div style="cursor:pointer">Diary</div><div style="cursor:pointer">Reply</div>
+          </div>
+
+          <div style="padding:30px 20px 28px;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">Year 3 · Mrs Alder</div>
+              <div style="font-size:11px;color:#8C8781;letter-spacing:.1em">5h</div>
+            </div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:34px;line-height:1.1;letter-spacing:-.01em">Library books<br>return Thursday.</div>
+            <div style="font-size:14px;line-height:1.7;font-weight:300;color:#4A4844">Six of twenty-four are still out. Bags at the door, please.</div>
+            <div style="display:flex;gap:26px;padding-top:6px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844">
+              <div style="cursor:pointer">Save</div><div onClick="{{ goTomorrow }}" style="cursor:pointer">Diary</div><div onClick="{{ goChat }}" style="cursor:pointer">Reply</div>
+            </div>
+          </div>
+
+          <div style="padding:30px 20px 20px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">Canteen</div>
+              <div style="font-size:11px;color:#8C8781;letter-spacing:.1em">1d</div>
+            </div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:26px;line-height:1.15">Winter menu, six additions</div>
+          </div>
+          <div style="height:402px;background:#F4F1EC"><image-slot id="ch-feed-2" shape="rect" placeholder="Canteen · 1:1"></image-slot></div>
+          <div style="display:flex;gap:26px;padding:18px 20px 40px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844">
+            <div style="cursor:pointer">Save</div><div onClick="{{ goCanteen }}" style="cursor:pointer">Order</div><div style="cursor:pointer">Reply</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isTomorrow }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 16px">
+            <div onClick="{{ goFeed }}" style="cursor:pointer;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Close</div>
+            <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Both children</div>
+          </div>
+          <div style="padding:34px 20px 30px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid rgba(14,14,14,.14)">
+            <div style="font-family:'Bodoni Moda',serif;font-size:62px;line-height:.9;letter-spacing:-.02em">TOMORROW</div>
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Wednesday 31 July</div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div style="padding:24px 20px;border-bottom:1px solid rgba(14,14,14,.1);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase">Canteen order</div>
+                <div style="width:34px;height:2px;background:#8A2B2B"></div>
+              </div>
+              <div style="font-size:14px;font-weight:300;color:#4A4844">Otto · cut-off 8.30am</div>
+            </div>
+            <div style="padding:24px 20px;border-bottom:1px solid rgba(14,14,14,.1);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase">Library books</div>
+                <div style="width:34px;height:2px;background:#B8964F"></div>
+              </div>
+              <div style="font-size:14px;font-weight:300;color:#4A4844">Ivy · return by 8.45am</div>
+            </div>
+            <div style="padding:24px 20px;border-bottom:1px solid rgba(14,14,14,.1);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase">Hat</div>
+                <div style="width:34px;height:2px;background:rgba(14,14,14,.14)"></div>
+              </div>
+              <div style="font-size:14px;font-weight:300;color:#4A4844">Both · all week</div>
+            </div>
+            <div style="padding:24px 20px;border-bottom:1px solid rgba(14,14,14,.1);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase">Sport uniform</div>
+                <div style="width:34px;height:2px;background:rgba(14,14,14,.14)"></div>
+              </div>
+              <div style="font-size:14px;font-weight:300;color:#4A4844">Ivy · Year 3 only</div>
+            </div>
+          </div>
+          <div style="padding:56px 20px;text-align:center;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#C9C4BC">Nothing else</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCommunity }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="padding:22px 20px 24px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="font-family:'Bodoni Moda',serif;font-size:30px;line-height:1">Community</div>
+          </div>
+          <div style="display:flex;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="flex:1;padding:16px 0;text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid #0E0E0E;margin-bottom:-1px">Messages</div>
+            <div style="flex:1;padding:16px 0;text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8C8781">Notices</div>
+            <div onClick="{{ goGifts }}" style="cursor:pointer;flex:1;padding:16px 0;text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8C8781">Gifts</div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div onClick="{{ goChat }}" style="cursor:pointer;display:flex;gap:16px;padding:22px 20px;border-bottom:1px solid rgba(14,14,14,.1);align-items:center">
+              <div style="width:44px;height:44px;border-radius:50%;background:#F4F1EC;flex:none;border:1px solid #0E0E0E"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Mrs Alder</div><div style="font-size:11px;color:#8C8781">5h</div></div>
+                <div style="font-size:13px;font-weight:300;color:#4A4844">Ivy read beautifully today.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;padding:22px 20px;border-bottom:1px solid rgba(14,14,14,.1);align-items:center">
+              <div style="width:44px;height:44px;border-radius:50%;background:#F4F1EC;flex:none;border:1px solid rgba(14,14,14,.16)"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Year 3 Parents · 24</div><div style="font-size:11px;color:#8C8781">1d</div></div>
+                <div style="font-size:13px;font-weight:300;color:#8C8781">Priya: costume swap, anyone?</div>
+              </div>
+            </div>
+            <div onClick="{{ goGifts }}" style="cursor:pointer;display:flex;gap:16px;padding:22px 20px;border-bottom:1px solid rgba(14,14,14,.1);align-items:center">
+              <div style="width:44px;height:44px;border-radius:50%;background:#F4F1EC;flex:none;border:1px solid rgba(14,14,14,.16)"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Gift · Mrs Alder</div><div style="width:34px;height:2px;background:#B8964F"></div></div>
+                <div style="font-size:13px;font-weight:300;color:#4A4844">Twelve of twenty-four in.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;padding:22px 20px;border-bottom:1px solid rgba(14,14,14,.1);align-items:center">
+              <div style="width:44px;height:44px;border-radius:50%;background:#F4F1EC;flex:none;border:1px solid rgba(14,14,14,.16)"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Front office</div><div style="font-size:11px;color:#8C8781">3d</div></div>
+                <div style="font-size:13px;font-weight:300;color:#8C8781">Absence recorded, 24 July.</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:48px 20px;text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#C9C4BC">Four conversations</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 20px 18px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div onClick="{{ goCommunity }}" style="cursor:pointer;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Back</div>
+            <div style="flex:1;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase">Mrs Alder</div>
+            <div style="width:34px"></div>
+          </div>
+          <div style="padding:28px 20px;display:flex;flex-direction:column;gap:30px">
+            <div style="text-align:center;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#C9C4BC">Today</div>
+            <div style="display:flex;flex-direction:column;gap:8px;max-width:290px">
+              <div style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Mrs Alder · 8.42</div>
+              <div style="background:#F4F1EC;padding:16px 18px;font-size:14px;line-height:1.65;font-weight:300">Ivy read beautifully today. She has asked to take the Roald Dahl home again.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;max-width:290px;align-self:flex-end;align-items:flex-end">
+              <div style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">You · 9.05</div>
+              <div style="background:#0E0E0E;color:#fff;padding:16px 18px;font-size:14px;line-height:1.65;font-weight:300;text-align:right">Thank you. We'll return the other two Thursday.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;max-width:290px">
+              <div style="font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Mrs Alder · 9.11</div>
+              <div style="background:#F4F1EC;padding:16px 18px;font-size:14px;line-height:1.65;font-weight:300">Perfect.</div>
+            </div>
+          </div>
+          <div style="margin:0 20px;border-top:1px solid rgba(14,14,14,.14);padding:20px 0;display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:13px;font-weight:300;color:#C9C4BC">Message</div>
+            <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Send</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isAdd }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 18px;border-bottom:1px solid rgba(14,14,14,.1)">
+            <div onClick="{{ goFeed }}" style="cursor:pointer;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Cancel</div>
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">New post</div>
+            <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase">Share</div>
+          </div>
+          <div style="padding:34px 20px 28px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-family:'Bodoni Moda',serif;font-size:30px;line-height:1.12;color:#C9C4BC">Paste the newsletter.</div>
+            <div style="font-size:13px;line-height:1.7;font-weight:300;color:#8C8781">We will find the dates, the money and the things to bring.</div>
+          </div>
+          <div style="margin:0 20px;height:1px;background:rgba(14,14,14,.14)"></div>
+          <div style="padding:26px 20px 12px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Detected · three items</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;gap:16px;padding:20px;border-top:1px solid rgba(14,14,14,.1);align-items:flex-start">
+              <div style="width:15px;height:15px;border:1px solid #0E0E0E;background:#0E0E0E;flex:none;margin-top:3px"></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Book Week parade</div><div style="font-size:13px;font-weight:300;color:#4A4844">Fri 1 Aug · 8.40am · Hall</div></div>
+            </div>
+            <div style="display:flex;gap:16px;padding:20px;border-top:1px solid rgba(14,14,14,.1);align-items:flex-start">
+              <div style="width:15px;height:15px;border:1px solid #0E0E0E;background:#0E0E0E;flex:none;margin-top:3px"></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Excursion payment</div><div style="font-size:13px;font-weight:300;color:#4A4844">$14.50 · due Wed 6 Aug</div></div>
+            </div>
+            <div style="display:flex;gap:16px;padding:20px;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1);align-items:flex-start">
+              <div style="width:15px;height:15px;border:1px solid rgba(14,14,14,.3);flex:none;margin-top:3px"></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Working bee</div><div style="font-size:13px;font-weight:300;color:#8C8781">Sat 9 Aug · optional</div></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px;display:flex;gap:12px;align-items:center">
+            <div style="width:64px;height:64px;background:#F4F1EC"><image-slot id="ch-add-1" shape="rect" placeholder=""></image-slot></div>
+            <div style="width:64px;height:64px;border:1px dashed rgba(14,14,14,.3);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:200;color:#8C8781">+</div>
+            <div style="flex:1;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8C8781">Attach</div>
+          </div>
+          <div style="padding:0 20px 40px">
+            <div onClick="{{ goTomorrow }}" style="cursor:pointer;border:1px solid #0E0E0E;padding:18px;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase">Add two to diary</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCanteen }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="padding:22px 20px 26px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:'Bodoni Moda',serif;font-size:44px;line-height:.95;letter-spacing:-.01em">CANTEEN</div>
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Otto · Year 1 · balance $32.10</div>
+          </div>
+          <div style="display:flex;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1)">
+            <div style="flex:1;padding:15px 0;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Mon</div>
+            <div style="flex:1;padding:15px 0;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:#0E0E0E;color:#fff">Tue</div>
+            <div style="flex:1;padding:15px 0;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Wed</div>
+            <div style="flex:1;padding:15px 0;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Thu</div>
+            <div style="flex:1;padding:15px 0;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Fri</div>
+          </div>
+          <div style="padding:28px 20px 14px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Hot</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px;border-top:1px solid rgba(14,14,14,.1)">
+              <div style="display:flex;flex-direction:column;gap:5px"><div style="font-size:15px;font-weight:300">Chicken &amp; corn roll</div><div style="font-size:11px;color:#8C8781;letter-spacing:.08em">Contains gluten</div></div>
+              <div style="display:flex;gap:18px;align-items:center"><div style="font-size:13px;font-weight:300">4.50</div><div style="width:22px;height:22px;border:1px solid #0E0E0E;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:200">+</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px;border-top:1px solid rgba(14,14,14,.1);background:#F4F1EC">
+              <div style="display:flex;flex-direction:column;gap:5px"><div style="font-size:15px;font-weight:300">Pumpkin soup</div><div style="font-size:11px;color:#8C8781;letter-spacing:.08em">In basket · 1</div></div>
+              <div style="display:flex;gap:18px;align-items:center"><div style="font-size:13px;font-weight:300">4.00</div><div style="width:22px;height:22px;border:1px solid #0E0E0E;background:#0E0E0E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px">1</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px;border-top:1px solid rgba(14,14,14,.1)">
+              <div style="display:flex;flex-direction:column;gap:5px"><div style="font-size:15px;font-weight:300">Sushi, two pieces</div><div style="font-size:11px;color:#8C8781;letter-spacing:.08em">Tuesday only</div></div>
+              <div style="display:flex;gap:18px;align-items:center"><div style="font-size:13px;font-weight:300">5.00</div><div style="width:22px;height:22px;border:1px solid #0E0E0E;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:200">+</div></div>
+            </div>
+          </div>
+          <div style="padding:28px 20px 14px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Cold &amp; sweet</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px;border-top:1px solid rgba(14,14,14,.1);background:#F4F1EC">
+              <div style="display:flex;flex-direction:column;gap:5px"><div style="font-size:15px;font-weight:300">Frozen pineapple</div><div style="font-size:11px;color:#8C8781;letter-spacing:.08em">In basket · 1</div></div>
+              <div style="display:flex;gap:18px;align-items:center"><div style="font-size:13px;font-weight:300">1.00</div><div style="width:22px;height:22px;border:1px solid #0E0E0E;background:#0E0E0E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px">1</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1)">
+              <div style="display:flex;flex-direction:column;gap:5px"><div style="font-size:15px;font-weight:300">Anzac biscuit</div><div style="font-size:11px;color:#8C8781;letter-spacing:.08em">Contains oats</div></div>
+              <div style="display:flex;gap:18px;align-items:center"><div style="font-size:13px;font-weight:300">1.50</div><div style="width:22px;height:22px;border:1px solid #0E0E0E;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:200">+</div></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px 40px">
+            <div style="background:#0E0E0E;color:#fff;padding:19px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.26em;text-transform:uppercase"><span>Order · Tuesday</span><span>$5.00</span></div>
+            <div style="text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8C8781;padding-top:18px">Cut-off 8.30am</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 20px">
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">The Marchettis</div>
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#0E0E0E" stroke-width="1"><path d="M2.5 6h17M2.5 11h17M2.5 16h17"></path></svg>
+          </div>
+          <div style="display:flex;gap:16px;padding:0 20px 26px">
+            <div style="display:flex;flex-direction:column;gap:9px;align-items:center">
+              <div style="width:66px;height:66px;border-radius:50%;background:#F4F1EC;border:1px solid #0E0E0E;outline:1px solid #0E0E0E;outline-offset:4px"></div>
+              <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase">Ivy</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;align-items:center">
+              <div style="width:66px;height:66px;border-radius:50%;background:#F4F1EC;border:1px solid rgba(14,14,14,.16)"></div>
+              <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Otto</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;align-items:center">
+              <div style="width:66px;height:66px;border-radius:50%;border:1px dashed rgba(14,14,14,.3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:200;color:#8C8781">+</div>
+              <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Add</div>
+            </div>
+          </div>
+          <div style="padding:0 20px 26px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:'Bodoni Moda',serif;font-size:36px;line-height:1">Ivy Marchetti</div>
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Year 3 · Mrs Alder · Northbridge</div>
+          </div>
+          <div style="display:flex;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1)">
+            <div onClick="{{ goTomorrow }}" style="cursor:pointer;flex:1;padding:20px 0;display:flex;flex-direction:column;gap:6px;align-items:center;border-right:1px solid rgba(14,14,14,.1)"><div style="font-family:'Bodoni Moda',serif;font-size:24px">4</div><div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8C8781">Diary</div></div>
+            <div onClick="{{ goVault }}" style="cursor:pointer;flex:1;padding:20px 0;display:flex;flex-direction:column;gap:6px;align-items:center;border-right:1px solid rgba(14,14,14,.1)"><div style="font-family:'Bodoni Moda',serif;font-size:24px">128</div><div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8C8781">Vault</div></div>
+            <div style="flex:1;padding:20px 0;display:flex;flex-direction:column;gap:6px;align-items:center"><div style="font-family:'Bodoni Moda',serif;font-size:24px">2</div><div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8C8781">Replies</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div onClick="{{ goVault }}" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid rgba(14,14,14,.1)"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Photo consent</div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ consentColor }}">{{ consentWord }}</div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid rgba(14,14,14,.1)"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Medical &amp; allergies</div><div style="font-size:11px;color:#8C8781">Peanut</div></div>
+            <div onClick="{{ goCanteen }}" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid rgba(14,14,14,.1)"><div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase">Canteen account</div><div style="font-size:11px;color:#8C8781">$32.10</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(14,14,14,.12);margin-top:1px">
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-1" shape="rect" placeholder=""></image-slot></div>
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-2" shape="rect" placeholder=""></image-slot></div>
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-3" shape="rect" placeholder=""></image-slot></div>
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-4" shape="rect" placeholder=""></image-slot></div>
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-5" shape="rect" placeholder=""></image-slot></div>
+            <div style="aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-pg-6" shape="rect" placeholder=""></image-slot></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isVault }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 22px">
+            <div onClick="{{ goProfile }}" style="cursor:pointer;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Back</div>
+            <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">128 items</div>
+          </div>
+          <div style="padding:0 20px 26px;display:flex;flex-direction:column;gap:12px">
+            <div style="font-family:'Bodoni Moda',serif;font-size:48px;line-height:.95;letter-spacing:-.01em">THE VAULT</div>
+            <div style="font-size:14px;line-height:1.7;font-weight:300;color:#4A4844">Every image of Ivy the school holds. Nobody sees it without your word.</div>
+          </div>
+          <div style="margin:0 20px;border-top:1px solid rgba(14,14,14,.14);border-bottom:1px solid rgba(14,14,14,.14);padding:22px 0;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase">Photo consent</div>
+              <div onClick="{{ toggleConsent }}" style="cursor:pointer;width:52px;height:26px;border:1px solid #0E0E0E;border-radius:13px;display:flex;align-items:center;padding:0 3px;justify-content:{{ knobAlign }};background:{{ trackBg }};transition:background .3s cubic-bezier(.2,.7,.2,1)">
+                <div style="width:18px;height:18px;border-radius:50%;background:{{ knobBg }};transition:background .3s"></div>
+              </div>
+            </div>
+            <div style="font-size:13px;line-height:1.7;font-weight:300;color:#8C8781">{{ consentLine }}</div>
+          </div>
+          <div style="padding:26px 20px 14px;display:flex;justify-content:space-between;align-items:baseline">
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">Book Week · 1 August</div>
+            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:{{ consentColor }}">{{ consentWord }}</div>
+          </div>
+          <div style="position:relative">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(14,14,14,.12);filter:blur({{ blurPx }});transition:filter .6s cubic-bezier(.2,.7,.2,1)">
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-1" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-2" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-3" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-4" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-5" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-6" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-7" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-8" shape="rect" placeholder=""></image-slot></div>
+              <div onClick="{{ openViewer }}" style="cursor:pointer;aspect-ratio:1;background:#F4F1EC"><image-slot id="ch-v-9" shape="rect" placeholder=""></image-slot></div>
+            </div>
+            <sc-if value="{{ withheld }}" hint-placeholder-val="{{ true }}">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+                <div style="background:#fff;padding:16px 22px;font-size:10px;letter-spacing:.3em;text-transform:uppercase">Withheld</div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="padding:30px 20px 40px;display:flex;flex-direction:column;gap:16px">
+            <div style="font-size:13px;line-height:1.8;font-weight:300;color:#8C8781">Newsletters · yearbook · class page · social media</div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;padding:15px 0;border-top:1px solid rgba(14,14,14,.1);font-size:12px;letter-spacing:.2em;text-transform:uppercase"><span>Yearbook</span><span style="color:{{ consentColor }}">{{ consentWord }}</span></div>
+              <div style="display:flex;justify-content:space-between;padding:15px 0;border-top:1px solid rgba(14,14,14,.1);font-size:12px;letter-spacing:.2em;text-transform:uppercase"><span>Class page</span><span style="color:{{ consentColor }}">{{ consentWord }}</span></div>
+              <div style="display:flex;justify-content:space-between;padding:15px 0;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781"><span>Social media</span><span style="color:#8A2B2B">Never</span></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isGifts }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;box-sizing:border-box;padding-top:58px;padding-bottom:104px;overflow-y:auto;animation:chRise .24s cubic-bezier(.2,.7,.2,1)">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px 22px">
+            <div onClick="{{ goCommunity }}" style="cursor:pointer;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Back</div>
+            <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8C8781">Anonymous</div>
+          </div>
+          <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">End of year · Year 3</div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:44px;line-height:.98">Mrs Alder</div>
+          </div>
+          <div style="padding:0 20px 30px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-family:'Bodoni Moda',serif;font-size:30px">$240</div>
+              <div style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8C8781">of $480 · 12 of 24</div>
+            </div>
+            <div style="height:2px;background:rgba(14,14,14,.14);position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:50%;background:#0E0E0E"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;padding:17px 20px;border-top:1px solid rgba(14,14,14,.1);font-size:13px;font-weight:300"><span>Priya S.</span><span style="color:#8C8781">$20</span></div>
+            <div style="display:flex;justify-content:space-between;padding:17px 20px;border-top:1px solid rgba(14,14,14,.1);font-size:13px;font-weight:300"><span>The Marchettis</span><span style="color:#8C8781">$20</span></div>
+            <div style="display:flex;justify-content:space-between;padding:17px 20px;border-top:1px solid rgba(14,14,14,.1);font-size:13px;font-weight:300"><span>D. Okafor</span><span style="color:#8C8781">$20</span></div>
+            <div style="display:flex;justify-content:space-between;padding:17px 20px;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1);font-size:13px;font-weight:300;color:#8C8781"><span>Nine others</span><span>$180</span></div>
+          </div>
+          <div style="padding:28px 20px 40px;display:flex;flex-direction:column;gap:18px">
+            <div style="border:1px solid #0E0E0E;padding:18px;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase">Contribute $20</div>
+            <div style="text-align:center;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8C8781">Closes 11 December</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ viewerOpen }}" hint-placeholder-val="{{ false }}">
+        <div onPointerDown="{{ onSwipeStart }}" onPointerUp="{{ onSwipeEnd }}" style="position:absolute;left:0;right:0;top:56px;bottom:0;background:#0E0E0E;z-index:60;animation:chCurtain .38s cubic-bezier(.2,.7,.2,1);cursor:pointer;display:flex;flex-direction:column;overflow:hidden;touch-action:none;transform:translateY({{ dragY }});opacity:{{ dragOpacity }}">
+          <div style="display:flex;gap:5px;padding:18px 16px 0">
+            <sc-for list="{{ segs }}" as="seg" hint-placeholder-count="2">
+              <div style="flex:1;height:1.5px;background:rgba(255,255,255,.28)"><div style="height:100%;background:#fff;width:{{ seg.w }}"></div></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 16px 0">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:13px;color:#fff">{{ storyMonogram }}</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#fff">{{ storyAuthor }}</div>
+                <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)">{{ storyAgo }}</div>
+              </div>
+            </div>
+            <div onClick="{{ closeViewer }}" style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.6)">Close</div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:34px 22px 0;position:relative">
+            <sc-if value="{{ storyHasImage }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;left:22px;right:22px;top:34px;bottom:200px;background:#1A1A1A;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3)">Image · 4:5</div>
+            </sc-if>
+            <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:16px;padding-bottom:26px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <div style="width:26px;height:2px;background:{{ storyAccent }}"></div>
+                <div style="font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:{{ storyAccent }}">{{ storyEyebrow }}</div>
+              </div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:38px;line-height:1.06;letter-spacing:-.01em;color:#fff;text-wrap:pretty">{{ storyTitle }}</div>
+              <div style="font-size:14px;line-height:1.7;font-weight:300;color:rgba(255,255,255,.62);max-width:300px">{{ storyBody }}</div>
+            </div>
+          </div>
+
+          <div style="padding:0 22px 26px;display:flex;flex-direction:column;gap:16px">
+            <sc-if value="{{ storyHasPost }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ openStoryPost }}" style="cursor:pointer;border:1px solid rgba(255,255,255,.55);padding:16px;text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#fff">View full post</div>
+            </sc-if>
+            <div style="text-align:center;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.3)">Swipe across · swipe down to close</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid rgba(14,14,14,.14);padding:18px 22px 30px;display:flex;justify-content:space-between;align-items:center;z-index:40">
+          <div onClick="{{ goFeed }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px;align-items:center;width:52px">
+            <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="{{ cFeed }}" stroke-width="1"><rect x="2.5" y="2.5" width="17" height="17"></rect><path d="M2.5 8.5h17"></path></svg>
+            <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:{{ cFeed }}">Feed</div>
+          </div>
+          <div onClick="{{ goCommunity }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px;align-items:center;width:52px">
+            <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="{{ cCommunity }}" stroke-width="1"><circle cx="8" cy="8" r="4"></circle><path d="M2 19c1-3.2 3.2-4.6 6-4.6S13 15.8 14 19M14.5 5.2a4 4 0 010 5.6M17 4a6.5 6.5 0 010 8"></path></svg>
+            <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:{{ cCommunity }}">Community</div>
+          </div>
+          <div onClick="{{ goAdd }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px;align-items:center;width:52px">
+            <div style="width:34px;height:34px;border:1px solid {{ cAdd }};display:flex;align-items:center;justify-content:center">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="{{ cAdd }}" stroke-width="1"><path d="M8 1v14M1 8h14"></path></svg>
+            </div>
+            <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:{{ cAdd }}">Add</div>
+          </div>
+          <div onClick="{{ goCanteen }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px;align-items:center;width:52px">
+            <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="{{ cCanteen }}" stroke-width="1"><path d="M4 2.5v7a2.5 2.5 0 005 0v-7M6.5 9.5V19.5M14 19.5V12M14 12c-1.5 0-2.5-1-2.5-3.5S12.5 2.5 14 2.5s2.5 3.5 2.5 6S15.5 12 14 12z"></path></svg>
+            <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:{{ cCanteen }}">Canteen</div>
+          </div>
+          <div onClick="{{ goProfile }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px;align-items:center;width:52px">
+            <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="{{ cProfile }}" stroke-width="1"><circle cx="11" cy="8" r="3.5"></circle><path d="M4 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"></path></svg>
+            <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:{{ cProfile }}">Profile</div>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </x-import>
+
+  <div style="width:230px;display:flex;flex-direction:column;gap:22px;padding-top:8px">
+    <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#8C8781">Now showing</div>
+    <div style="font-family:'Bodoni Moda',serif;font-size:30px;line-height:1.05">{{ screenTitle }}</div>
+    <div style="font-size:13px;line-height:1.75;color:#4A4844;font-weight:300;text-wrap:pretty">{{ screenNote }}</div>
+  </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1040}}">
+const NOTES = {
+  onboarding: ["Access", "A fashion-house cover page. Wordmark, one rule, two fields, one black button. No illustration, no benefit bullets."],
+  feed: ["Feed", "Instagram's structure held to Chanel's restraint: stories rail as children and shortcuts, posts separated by hairlines, imagery bleeding edge to edge at 4:5 and 1:1. Text-only posts are set large in Didone rather than dressed up as cards."],
+  tomorrow: ["Tomorrow", "The whole promise of the app in one screen. A date, four rules, and the words NOTHING ELSE. Status is a 34px coloured line, never a badge."],
+  community: ["Community", "Inbox, notices and the gift fund under one tab. Rows, not bubbles; the gift row carries a brass line because money is due."],
+  chat: ["Thread", "Teacher messages sit in bone; yours sit in ink and align right. Squared corners keep it out of consumer-messenger territory."],
+  add: ["Composer", "Paste a newsletter, we return dates. The parse result is a checklist of hairline squares — the only place the app is chatty is that it isn't."],
+  canteen: ["Canteen", "A menu, set like a menu. Day strip on top, prices in the same weight as the item, in-basket rows filled bone. One black bar to commit."],
+  profile: ["Profile", "The child switcher is the stories rail, promoted. Three hairline stat columns, then the 3-up grid to the screen edge."],
+  vault: ["The Vault", "The signature interaction. Consent is withheld by default: the grid sits under an 18px blur with a single WITHHELD plate. Grant it and the blur resolves over 600ms — and the yearbook, class page and social lines resolve with it."],
+  gifts: ["Teacher gift", "Anonymous by design. Progress is one 2px rule, contributors are a plain ledger, and the amount is set in Didone so it reads as a figure rather than a target."]
+};
+const OXIDE = "#C46A6A", BRASS = "#D8B871", FERN = "#8FB49F", PLAIN = "rgba(255,255,255,.5)";
+const GROUPS = [
+  { id: "school", label: "School", monogram: "N", author: "Northbridge Primary", items: [
+    { eyebrow: "Alert · today", accent: OXIDE, title: "Assembly moved to 2.15", body: "In the hall. Year 3 are performing — parents welcome from 2.10.", ago: "40m", post: true },
+    { eyebrow: "Reminder", accent: PLAIN, title: "Book Week parade, Friday 8.40", body: "A character from a book. No superheroes.", ago: "40m", post: true, image: true }
+  ]},
+  { id: "canteen", label: "Canteen", monogram: "C", author: "Canteen", items: [
+    { eyebrow: "Special · Tuesday", accent: BRASS, title: "Pumpkin soup, $4", body: "With a warm roll. Until it runs out.", ago: "2h", post: true, image: true },
+    { eyebrow: "Cut-off", accent: OXIDE, title: "Orders close 8.30am", body: "Tomorrow's menu is open now.", ago: "2h", post: true }
+  ]},
+  { id: "uniform", label: "Uniform", monogram: "U", author: "Uniform Shop", items: [
+    { eyebrow: "Sale · Friday", accent: BRASS, title: "Winter stock, 30% off", body: "8.30 to 10.30 only. Sizes 4 to 12 remain.", ago: "5h", post: true, image: true },
+    { eyebrow: "Two days to go", accent: PLAIN, title: "Bring the old blazer", body: "Trade-in credit of $10 on any hand-back.", ago: "5h", post: false }
+  ]},
+  { id: "year3", label: "Year 3", monogram: "3", author: "Year 3 · Mrs Alder", items: [
+    { eyebrow: "Reminder", accent: PLAIN, title: "Library books return Thursday", body: "Six of twenty-four are still out. Bags at the door.", ago: "5h", post: true }
+  ]},
+  { id: "ivy", label: "Ivy", monogram: "I", author: "Ivy · Year 3", items: [
+    { eyebrow: "Book Week", accent: FERN, title: "Costume line-up, 8.40am", body: "Consented for the class page.", ago: "1d", post: false, image: true },
+    { eyebrow: "Book Week", accent: FERN, title: "The parade, second lap", body: "Consented for the class page.", ago: "1d", post: false, image: true }
+  ]},
+  { id: "otto", label: "Otto", monogram: "O", author: "Otto · Year 1", items: [
+    { eyebrow: "Swimming", accent: FERN, title: "First lap unaided", body: "Consented for the yearbook.", ago: "2d", post: false, image: true }
+  ]}
+];
+const DURATION = 6500, STEP = 80;
+
+class Component extends DCLogic {
+  state = { screen: "feed", consent: false, viewerOpen: false, gi: 0, ii: 0, progress: 0, seen: [] };
+  go = (screen) => () => { this.stop(); this.setState({ screen, viewerOpen: false }); };
+  componentWillUnmount() { this.stop(); }
+  stop() { clearInterval(this._t); this._t = null; }
+  start() {
+    this.stop();
+    this._t = setInterval(() => this.setState((p) => {
+      if (!p.viewerOpen) return null;
+      const np = p.progress + STEP / DURATION;
+      return np < 1 ? { progress: np } : this.advance(p);
+    }), STEP);
+  }
+  seenWith(p, id) { return p.seen.indexOf(id) >= 0 ? p.seen : p.seen.concat([id]); }
+  advance(p) {
+    const g = GROUPS[p.gi];
+    if (p.ii + 1 < g.items.length) return { ii: p.ii + 1, progress: 0 };
+    return this.nextGroup(p);
+  }
+  nextGroup(p) {
+    const seen = this.seenWith(p, GROUPS[p.gi].id);
+    if (p.gi + 1 < GROUPS.length) return { gi: p.gi + 1, ii: 0, progress: 0, seen };
+    this.stop();
+    return { viewerOpen: false, progress: 0, seen };
+  }
+  prevGroup(p) { return p.gi > 0 ? { gi: p.gi - 1, ii: 0, progress: 0 } : { ii: 0, progress: 0 }; }
+  back(p) {
+    if (p.ii > 0) return { ii: p.ii - 1, progress: 0 };
+    return p.gi > 0 ? { gi: p.gi - 1, ii: 0, progress: 0 } : { progress: 0 };
+  }
+  openGroup = (gi) => () => {
+    this.setState((p) => ({ viewerOpen: true, gi, ii: 0, progress: 0, seen: this.seenWith(p, GROUPS[gi].id) }));
+    this.start();
+  };
+  close = () => { this.stop(); this.setState({ viewerOpen: false, progress: 0 }); };
+  renderVals() {
+    const s = this.state.screen, on = this.state.consent;
+    const ink = "#0E0E0E", ash = "#8C8781";
+    const c = (k) => (s === k ? ink : ash);
+    const note = NOTES[s] || NOTES.feed;
+    const g = GROUPS[this.state.gi] || GROUPS[0];
+    const item = g.items[Math.min(this.state.ii, g.items.length - 1)];
+    const chipDefs = [["onboarding","Access"],["feed","Feed"],["tomorrow","Tomorrow"],["community","Community"],["chat","Thread"],["add","Composer"],["canteen","Canteen"],["profile","Profile"],["vault","Vault · consent"],["gifts","Teacher gift"]];
+    return {
+      chips: chipDefs.map(([k, label]) => ({
+        label, go: this.go(k),
+        bg: s === k ? ink : "transparent",
+        fg: s === k ? "#FFFFFF" : ink
+      })),
+      isOnboarding: s === "onboarding", isFeed: s === "feed", isTomorrow: s === "tomorrow",
+      isCommunity: s === "community", isChat: s === "chat", isAdd: s === "add",
+      isCanteen: s === "canteen", isProfile: s === "profile", isVault: s === "vault", isGifts: s === "gifts",
+      showTabs: s !== "onboarding" && !this.state.viewerOpen,
+      goFeed: this.go("feed"), goCommunity: this.go("community"), goAdd: this.go("add"),
+      goCanteen: this.go("canteen"), goProfile: this.go("profile"), goTomorrow: this.go("tomorrow"),
+      goVault: this.go("vault"), goGifts: this.go("gifts"), goChat: this.go("chat"),
+      cFeed: c("feed"), cCommunity: c("community"), cAdd: c("add"), cCanteen: c("canteen"), cProfile: c("profile"),
+      consent: on, withheld: !on,
+      consentWord: on ? "Granted" : "Withheld",
+      consentColor: on ? "#2F5D4A" : "#8A2B2B",
+      consentLine: on
+        ? "Granted for newsletters, the yearbook and the class page. Revoke at any time and every image hides again."
+        : "Withheld. Images of Ivy are hidden here, in the class page and in the yearbook until you grant consent.",
+      blurPx: on ? "0px" : "18px",
+      knobAlign: on ? "flex-end" : "flex-start",
+      trackBg: on ? "#0E0E0E" : "#FFFFFF",
+      knobBg: on ? "#FFFFFF" : "#0E0E0E",
+      toggleConsent: () => this.setState((p) => ({ consent: !p.consent })),
+      rails: GROUPS.map((g, i) => {
+        const seen = this.state.seen.indexOf(g.id) >= 0;
+        return {
+          label: g.label, monogram: g.monogram, open: this.openGroup(i),
+          ring: seen ? "rgba(14,14,14,.16)" : "#0E0E0E",
+          outline: seen ? "none" : "1px solid #0E0E0E",
+          labelColor: seen ? "#8C8781" : "#0E0E0E"
+        };
+      }),
+      viewerOpen: this.state.viewerOpen,
+      openViewer: this.openGroup(4),
+      closeViewer: (e) => { if (e) e.stopPropagation(); this.close(); },
+      segs: g.items.map((_, i) => ({ w: i < this.state.ii ? "100%" : i === this.state.ii ? (Math.min(1, this.state.progress) * 100).toFixed(1) + "%" : "0%" })),
+      storyAuthor: g.author, storyMonogram: g.monogram, storyAgo: item.ago,
+      storyEyebrow: item.eyebrow, storyAccent: item.accent, storyTitle: item.title,
+      storyBody: item.body, storyHasImage: !!item.image, storyHasPost: !!item.post,
+      openStoryPost: (e) => { if (e) e.stopPropagation(); this.stop(); this.setState({ viewerOpen: false, screen: "feed" }); },
+      onSwipeStart: (e) => { this._sx = e.clientX; this._sy = e.clientY; this.stop(); },
+      onSwipeEnd: (e) => {
+        const dx = e.clientX - this._sx, dy = e.clientY - this._sy;
+        if (dy > 70 && Math.abs(dy) > Math.abs(dx)) return this.close();
+        if (dx < -45) this.setState((p) => this.nextGroup(p));
+        else if (dx > 45) this.setState((p) => this.prevGroup(p));
+        else {
+          const r = e.currentTarget.getBoundingClientRect();
+          const left = (e.clientX - r.left) < r.width * 0.32;
+          this.setState((p) => (left ? this.back(p) : this.advance(p)));
+        }
+        if (this.state.viewerOpen) this.start();
+      },
+      dragY: "0px", dragOpacity: 1,
+      screenTitle: note[0], screenNote: note[1]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

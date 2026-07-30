@@ -1,0 +1,211 @@
+/*
+ * Story viewer — signature interaction #1.
+ *
+ * Full-screen ink curtain from the bottom (380ms), inset below the status bar
+ * so the device clock stays legible. Progress across the top, content
+ * bottom-anchored, accent hairline classifying the card.
+ */
+
+.story {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--safe-top);
+  bottom: 0;
+  z-index: 60;
+  overflow: hidden;
+  animation: ch-curtain var(--t-curtain) var(--ease);
+}
+
+.story__surface {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    transform var(--t-screen) var(--ease),
+    opacity var(--t-screen) var(--ease);
+}
+
+.story__surface--dragging {
+  transition: none;
+}
+
+/* ── Progress ──────────────────────────────────────────────────────────── */
+
+.story__progress {
+  display: flex;
+  gap: 5px;
+  padding: 18px 16px 0;
+}
+
+.story__track {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.story__fill {
+  height: 100%;
+  background: #fff;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+
+.story__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 16px 0;
+}
+
+.story__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.story__monogram {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 13px;
+  color: #fff;
+}
+
+.story__byline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.story__source {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.story__ago {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.story__close {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Content ───────────────────────────────────────────────────────────── */
+
+.story__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px 22px 0;
+  min-height: 0;
+}
+
+.story__image {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 34px;
+  bottom: 200px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.story__copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 26px;
+}
+
+.story__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.story__accent {
+  width: 26px;
+  height: 2px;
+  flex: none;
+}
+
+.story__eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.story__title {
+  font-size: 38px;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-wrap: pretty;
+}
+
+.story__body {
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 300px;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+
+.story__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 22px calc(26px + var(--safe-bottom));
+}
+
+.story__post {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  padding: 16px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.story__hint {
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}

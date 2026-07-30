@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E5DF;font-family:Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0E0E0E}a:hover{color:#8C8781}
+.dv-turn{padding:48px 52px 40px;border-bottom:1px solid rgba(14,14,14,.12);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:12px;margin:0 0 30px}
+.dv-tid{font:400 10px Jost,sans-serif;letter-spacing:.2em;padding:4px 8px;background:#0E0E0E;color:#fff;text-decoration:none}
+.dv-tname{font:400 12px Jost,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#0E0E0E}
+.dv-row{margin:0 0 46px}
+.dv-rowlabel{font:400 10px Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#8C8781;margin:0 0 18px;border-top:1px solid rgba(14,14,14,.12);padding-top:14px}
+.dv-opts{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+.dv-oid{font:400 10px Jost,sans-serif;letter-spacing:.18em;padding:3px 7px;background:rgba(14,14,14,.09);color:#0E0E0E;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:9px;font:300 11px/1.3 Jost,sans-serif;letter-spacing:.06em;color:rgba(14,14,14,.55)}
+.dv-card{max-width:100%;background:#fff;overflow:hidden}
+.dv-opt:target .dv-oid{background:#0E0E0E;color:#fff}
+.dv-next{margin:8px 0 0;font:300 12px/1.7 Jost,sans-serif;color:rgba(14,14,14,.5)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Atomic variations · art direction, feed card, tab bar, display type, vault</span></div>
+
+  <div class="dv-row">
+    <div class="dv-rowlabel">How far to push the luxury read</div>
+    <div class="dv-opts">
+      <div class="dv-opt" id="1a">
+        <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Strict monochrome — paper, ink, one hairline</div>
+        <div class="dv-card" style="width:330px;background:#fff;padding:34px 26px 30px;border:1px solid rgba(14,14,14,.1)">
+          <div style="font-family:'Bodoni Moda',serif;font-size:17px;letter-spacing:.14em;text-align:center;color:#0E0E0E">CLASS HERO</div>
+          <div style="height:1px;background:rgba(14,14,14,.14);margin:24px 0"></div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:34px;line-height:1.08;color:#0E0E0E">Library books<br>return Thursday.</div>
+          <div style="font-size:13px;line-height:1.7;font-weight:300;color:#4A4844;margin-top:14px">Six of twenty-four are still out.</div>
+          <div style="display:flex;gap:22px;margin-top:22px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844"><span>Save</span><span>Diary</span><span>Reply</span></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1b">
+        <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Bone ground — one warm neutral carries the surface</div>
+        <div class="dv-card" style="width:330px;background:#F4F1EC;padding:34px 26px 30px">
+          <div style="font-family:'Bodoni Moda',serif;font-size:17px;letter-spacing:.14em;text-align:center;color:#0E0E0E">CLASS HERO</div>
+          <div style="height:1px;background:rgba(14,14,14,.2);margin:24px 0"></div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:34px;line-height:1.08;color:#0E0E0E">Library books<br>return Thursday.</div>
+          <div style="font-size:13px;line-height:1.7;font-weight:300;color:#4A4844;margin-top:14px">Six of twenty-four are still out.</div>
+          <div style="display:flex;gap:22px;margin-top:22px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844"><span>Save</span><span>Diary</span><span>Reply</span></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1c">
+        <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Inverted couture — ink ground, hairlines in white</div>
+        <div class="dv-card" style="width:330px;background:#0E0E0E;padding:34px 26px 30px">
+          <div style="font-family:'Bodoni Moda',serif;font-size:17px;letter-spacing:.14em;text-align:center;color:#fff">CLASS HERO</div>
+          <div style="height:1px;background:rgba(255,255,255,.25);margin:24px 0"></div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:34px;line-height:1.08;color:#fff">Library books<br>return Thursday.</div>
+          <div style="font-size:13px;line-height:1.7;font-weight:300;color:rgba(255,255,255,.6);margin-top:14px">Six of twenty-four are still out.</div>
+          <div style="display:flex;gap:22px;margin-top:22px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.75)"><span>Save</span><span>Diary</span><span>Reply</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-row">
+    <div class="dv-rowlabel">Feed card — three takes</div>
+    <div class="dv-opts">
+      <div class="dv-opt" id="1d">
+        <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Editorial — caption above, image bleeds full width</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1)">
+          <div style="padding:22px 20px 18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase">Northbridge Primary</div><div style="font-size:10px;color:#8C8781">2d</div></div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:27px;line-height:1.12">Book Week Parade</div>
+            <div style="font-size:13px;line-height:1.7;font-weight:300;color:#4A4844">Friday, 8.40 in the hall.</div>
+          </div>
+          <div style="height:300px;background:#F4F1EC;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#B5AFA6">Image 4:5</div>
+          <div style="display:flex;gap:22px;padding:16px 20px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844"><span>Save</span><span>Diary</span><span>Reply</span></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1e">
+        <div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Campaign — full-bleed image, type laid over the crop</div>
+        <div class="dv-card" style="width:330px;position:relative;height:430px;background:#F4F1EC">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#B5AFA6">Image · cropped hard</div>
+          <div style="position:absolute;left:0;right:0;top:0;padding:20px;display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#0E0E0E">Northbridge Primary</div><div style="font-size:10px;color:#4A4844">2d</div></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:24px 20px;background:linear-gradient(to top,rgba(255,255,255,.92),rgba(255,255,255,0))">
+            <div style="font-family:'Bodoni Moda',serif;font-size:30px;line-height:1.08;color:#0E0E0E">Book Week<br>Parade</div>
+            <div style="display:flex;gap:22px;margin-top:16px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#0E0E0E"><span>Save</span><span>Diary</span><span>Reply</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1f">
+        <div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Ledger — no image, indexed like a lookbook page</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);padding:24px 20px 20px;display:flex;gap:16px">
+          <div style="font-family:'Bodoni Moda',serif;font-size:13px;color:#8C8781;padding-top:4px">03</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase">Northbridge Primary</div><div style="font-size:10px;color:#8C8781">2d</div></div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:26px;line-height:1.12">Book Week Parade</div>
+            <div style="display:flex;flex-direction:column;gap:0;margin-top:4px">
+              <div style="display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid rgba(14,14,14,.1);font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:#8C8781">When</span><span>Fri 8.40</span></div>
+              <div style="display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid rgba(14,14,14,.1);font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:#8C8781">Where</span><span>Hall</span></div>
+              <div style="display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid rgba(14,14,14,.1);border-bottom:1px solid rgba(14,14,14,.1);font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:#8C8781">Bring</span><span>Costume</span></div>
+            </div>
+            <div style="display:flex;gap:22px;margin-top:8px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#4A4844"><span>Save</span><span>Diary</span><span>Reply</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-row">
+    <div class="dv-rowlabel">Tab bar treatment</div>
+    <div class="dv-opts">
+      <div class="dv-opt" id="1g">
+        <div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Hairline icons + micro labels (used in the mockup)</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);border-top:1px solid rgba(14,14,14,.3);padding:16px 18px 22px;display:flex;justify-content:space-between">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="#0E0E0E" stroke-width="1"><rect x="2.5" y="2.5" width="17" height="17"></rect><path d="M2.5 8.5h17"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase">Feed</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="#8C8781" stroke-width="1"><circle cx="8" cy="8" r="4"></circle><path d="M2 19c1-3.2 3.2-4.6 6-4.6S13 15.8 14 19"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8C8781">Community</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><div style="width:30px;height:30px;border:1px solid #8C8781;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:200;color:#8C8781">+</div><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8C8781">Add</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="#8C8781" stroke-width="1"><path d="M4 2.5v7a2.5 2.5 0 005 0v-7M6.5 9.5V19.5M14 19.5V12"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8C8781">Canteen</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="#8C8781" stroke-width="1"><circle cx="11" cy="8" r="3.5"></circle><path d="M4 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8C8781">Profile</div></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1h">
+        <div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>Wordmark bar — no icons, tracked type only, active underlined</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);border-top:1px solid rgba(14,14,14,.3);padding:22px 18px 26px;display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #0E0E0E;padding-bottom:5px">Feed</div>
+          <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Comm</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:19px;line-height:1;padding:0 4px">+</div>
+          <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Canteen</div>
+          <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8C8781">Me</div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1i">
+        <div class="dv-olabel"><a class="dv-oid" href="#1i">1i</a>Ink plinth — bar inverts, add sits as a white square</div>
+        <div class="dv-card" style="width:330px;background:#0E0E0E;padding:18px 18px 24px;display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="1"><rect x="2.5" y="2.5" width="17" height="17"></rect><path d="M2.5 8.5h17"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#fff">Feed</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1"><circle cx="8" cy="8" r="4"></circle><path d="M2 19c1-3.2 3.2-4.6 6-4.6S13 15.8 14 19"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)">Community</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><div style="width:30px;height:30px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:200;color:#0E0E0E">+</div><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)">Add</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1"><path d="M4 2.5v7a2.5 2.5 0 005 0v-7M6.5 9.5V19.5M14 19.5V12"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)">Canteen</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;width:48px"><svg width="19" height="19" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1"><circle cx="11" cy="8" r="3.5"></circle><path d="M4 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"></path></svg><div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)">Profile</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-row">
+    <div class="dv-rowlabel">Display type treatment — the "Tomorrow" screen</div>
+    <div class="dv-opts">
+      <div class="dv-opt" id="1j">
+        <div class="dv-olabel"><a class="dv-oid" href="#1j">1j</a>Didone, tight, all caps — house voice</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);padding:34px 22px 26px">
+          <div style="font-family:'Bodoni Moda',serif;font-size:56px;line-height:.9;letter-spacing:-.02em">TOMORROW</div>
+          <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781;margin-top:14px">Wednesday 31 July</div>
+          <div style="height:1px;background:rgba(14,14,14,.14);margin:24px 0 0"></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-size:10px;letter-spacing:.3em;text-transform:uppercase"><span>Canteen order</span><span style="width:30px;height:2px;background:#8A2B2B;align-self:center"></span></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1k">
+        <div class="dv-olabel"><a class="dv-oid" href="#1k">1k</a>Garamond italic — softer, more invitation than notice</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);padding:34px 22px 26px">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:62px;line-height:.92">Tomorrow</div>
+          <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781;margin-top:14px">Wednesday 31 July</div>
+          <div style="height:1px;background:rgba(14,14,14,.14);margin:24px 0 0"></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-size:10px;letter-spacing:.3em;text-transform:uppercase"><span>Canteen order</span><span style="width:30px;height:2px;background:#8A2B2B;align-self:center"></span></div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1l">
+        <div class="dv-olabel"><a class="dv-oid" href="#1l">1l</a>Grotesque, thin, extended — nav-plate discipline</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);padding:34px 22px 26px">
+          <div style="font-size:30px;font-weight:200;letter-spacing:.28em;text-transform:uppercase;line-height:1.1">Tomorrow</div>
+          <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781;margin-top:18px">Wednesday 31 July</div>
+          <div style="height:1px;background:rgba(14,14,14,.14);margin:24px 0 0"></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-size:10px;letter-spacing:.3em;text-transform:uppercase"><span>Canteen order</span><span style="width:30px;height:2px;background:#8A2B2B;align-self:center"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-row">
+    <div class="dv-rowlabel">Vault grid &amp; consent gating</div>
+    <div class="dv-opts">
+      <div class="dv-opt" id="1m">
+        <div class="dv-olabel"><a class="dv-oid" href="#1m">1m</a>Blur veil + one plate (used in the mockup)</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1)">
+          <div style="padding:20px 20px 16px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">Photo consent</div><div style="width:46px;height:24px;border:1px solid #0E0E0E;border-radius:12px;display:flex;align-items:center;padding:0 3px"><div style="width:16px;height:16px;border-radius:50%;background:#0E0E0E"></div></div></div>
+          <div style="position:relative">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(14,14,14,.12);filter:blur(14px)">
+              <div style="aspect-ratio:1;background:#EDE9E2"></div><div style="aspect-ratio:1;background:#F4F1EC"></div><div style="aspect-ratio:1;background:#E5E0D8"></div>
+              <div style="aspect-ratio:1;background:#F4F1EC"></div><div style="aspect-ratio:1;background:#E5E0D8"></div><div style="aspect-ratio:1;background:#EDE9E2"></div>
+              <div style="aspect-ratio:1;background:#E5E0D8"></div><div style="aspect-ratio:1;background:#EDE9E2"></div><div style="aspect-ratio:1;background:#F4F1EC"></div>
+            </div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div style="background:#fff;padding:14px 20px;font-size:9px;letter-spacing:.3em;text-transform:uppercase">Withheld</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1n">
+        <div class="dv-olabel"><a class="dv-oid" href="#1n">1n</a>Empty frames — nothing to blur, only a count</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1)">
+          <div style="padding:20px 20px 16px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase">Photo consent</div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8A2B2B">Withheld</div></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(14,14,14,.12)">
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+            <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#C9C4BC">—</div>
+          </div>
+          <div style="padding:20px;text-align:center;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8C8781">128 items held, none shown</div>
+        </div>
+      </div>
+      <div class="dv-opt" id="1o">
+        <div class="dv-olabel"><a class="dv-oid" href="#1o">1o</a>Per-use ledger — consent granted channel by channel</div>
+        <div class="dv-card" style="width:330px;border:1px solid rgba(14,14,14,.1);padding:20px">
+          <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:16px">Photo consent · Ivy</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-top:1px solid rgba(14,14,14,.12);font-size:11px;letter-spacing:.18em;text-transform:uppercase"><span>Class page</span><span style="width:30px;height:2px;background:#2F5D4A"></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-top:1px solid rgba(14,14,14,.12);font-size:11px;letter-spacing:.18em;text-transform:uppercase"><span>Yearbook</span><span style="width:30px;height:2px;background:#2F5D4A"></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-top:1px solid rgba(14,14,14,.12);font-size:11px;letter-spacing:.18em;text-transform:uppercase"><span>Newsletter</span><span style="width:30px;height:2px;background:#B8964F"></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-top:1px solid rgba(14,14,14,.12);border-bottom:1px solid rgba(14,14,14,.12);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8C8781"><span>Social media</span><span style="width:30px;height:2px;background:#8A2B2B"></span></div>
+          </div>
+          <div style="margin-top:18px;font-size:12px;line-height:1.7;font-weight:300;color:#8C8781">Three of four granted. The grid shows what each channel may use.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="dv-next">Try next: "take the whole app to <a class="dv-oid" href="#1c">1c</a>" · "use <a class="dv-oid" href="#1e">1e</a> for school posts and <a class="dv-oid" href="#1f">1f</a> for class posts" · "swap the tab bar for <a class="dv-oid" href="#1h">1h</a>" · "combine <a class="dv-oid" href="#1m">1m</a> with the ledger from <a class="dv-oid" href="#1o">1o</a>"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

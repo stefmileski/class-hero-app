@@ -1,0 +1,152 @@
+/*
+ * Class Hero — design tokens
+ * Source of truth: design_handoff_class_hero/README.md + Class Hero - Design System.dc.html
+ *
+ * Colour appears only as a 1–2px line, never as a fill. No shadows, no
+ * gradients, no rounded cards. Only circles (avatars, toggle knob) and the
+ * consent toggle track carry a border-radius.
+ */
+
+:root {
+  /* Neutrals */
+  --ink: #0e0e0e;
+  --graphite: #4a4844;
+  --ash: #8c8781;
+  --faint: #c9c4bc;
+  --bone: #f4f1ec;
+  --paper: #ffffff;
+
+  /* Rules. `--hairline` is the standard divider; `--hairline-soft` is the
+     lighter weight used for rows within a single screen. */
+  --hairline: rgba(14, 14, 14, 0.14);
+  --hairline-soft: rgba(14, 14, 14, 0.1);
+  --hairline-mid: rgba(14, 14, 14, 0.16);
+  --hairline-strong: rgba(14, 14, 14, 0.3);
+  --hairline-grid: rgba(14, 14, 14, 0.12);
+
+  /* State colours — light backgrounds */
+  --fern: #2f5d4a; /* consent granted */
+  --oxide: #8a2b2b; /* restricted / urgent */
+  --brass: #b8964f; /* due today / money */
+
+  /* State colours — story viewer (ink background) */
+  --fern-dark: #8fb49f;
+  --oxide-dark: #c46a6a;
+  --brass-dark: #d8b871;
+  --plain-dark: rgba(255, 255, 255, 0.5);
+
+  /* Type */
+  --display: 'Bodoni Moda', 'Didot', 'Times New Roman', serif;
+  --ui: 'Jost', system-ui, -apple-system, sans-serif;
+
+  /* Spacing — 4-base scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 20px;
+  --s-5: 32px;
+  --s-6: 48px;
+  --s-7: 72px;
+
+  /* Screen margin. Text and rules honour it; imagery bleeds past it. */
+  --margin: 20px;
+
+  /* Motion — no spring, no bounce, no overshoot */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-screen: 240ms;
+  --t-curtain: 380ms;
+  --t-consent: 600ms;
+  --t-toggle: 300ms;
+
+  /* Safe areas. On a device these are the status bar and home indicator; in a
+     desktop browser they collapse to zero, which is correct. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Headings and paragraphs carry the surrounding rhythm, never their own. The
+   system has no bold weight, so they inherit rather than default to it. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+svg {
+  display: block;
+}
+
+@keyframes ch-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ch-curtain {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
