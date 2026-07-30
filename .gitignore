@@ -2,3 +2,12 @@ node_modules
 dist
 *.tsbuildinfo
 .DS_Store
+
+# Playwright
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
+# Screenshot baselines are machine-specific (font rendering + whether Google
+# Fonts is reachable). Generate your own with `npm run test:visual`.
+/tests/__screenshots__

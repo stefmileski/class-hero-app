@@ -14,10 +14,19 @@ captures in [`design/screenshots/`](design/screenshots).
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
-npm run build      # tsc -b && vite build
+npm run dev         # http://localhost:5173
+npm run build       # tsc -b && vite build
 npm run typecheck
+
+npx playwright install chromium   # once
+npm test            # behaviour + design measurements
+npm run test:visual # screenshot comparison
 ```
+
+Built mobile-first at the 402px design width. In a desktop browser, use device
+mode (`Cmd/Ctrl+Shift+M`) at **402 × 874** to see it as specified; `npm run dev --
+--host` lets you open it on a phone, which is the only way to feel the gestures.
+Fonts come from Google Fonts, so type falls back to system faces offline.
 
 Vite + React 18 + TypeScript. No UI library, no CSS framework — the design is
 hairlines and type, and a utility framework would only obscure the exact values.
@@ -41,6 +50,7 @@ src/
     base.css               shell, typographic primitives, shared components
     screens.css            per-screen layout
     story.css              story viewer
+tests/                     Playwright suite — see tests/README.md
 design/                    the handoff bundle this implements (reference only)
 ```
 
