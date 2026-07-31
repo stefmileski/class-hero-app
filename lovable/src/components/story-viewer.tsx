@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 
 /**
  * Story Viewer — signature surface of the monochrome redesign.
@@ -27,12 +26,14 @@ export type StoryItem = {
   accent?: "fern" | "oxide" | "brass" | "neutral";
   imageUrl?: string | null;
   /**
-   * Where "View full post" goes. Only set it for content that was publicly
-   * posted — a consented photograph of one child is not a public post, and
-   * must not offer the link.
+   * Marks content that was publicly posted, so the viewer offers "View full
+   * post". A consented photograph of one child is not a public post and must
+   * not set this.
+   *
+   * Where it goes is the caller's business — the route file owns the typed
+   * navigation. See `onOpenPost`.
    */
-  postTo?: string;
-  postParams?: Record<string, string>;
+  hasPost?: boolean;
 };
 
 export type StoryGroup = {
@@ -81,10 +82,17 @@ export function StoryViewer({
   groups,
   startGroup = 0,
   onClose,
+  onOpenPost,
 }: {
   groups: StoryGroup[];
   startGroup?: number;
   onClose: () => void;
+  /**
+   * Called with the current card when "View full post" is tapped. The viewer
+   * closes itself first. Routing lives with the caller so the router's typed
+   * `to` is never handed a bare string.
+   */
+  onOpenPost?: (item: StoryItem) => void;
 }) {
   const [g, setG] = useState(startGroup);
   const [i, setI] = useState(0);
@@ -328,19 +336,20 @@ export function StoryViewer({
           )}
 
           {/* Only for content that was publicly posted. */}
-          {item.postTo && (
-            <Link
-              to={item.postTo}
-              params={item.postParams as never}
+          {item.hasPost && onOpenPost && (
+            <button
               onPointerDown={(e) => e.stopPropagation()}
               onPointerUp={(e) => e.stopPropagation()}
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                onOpenPost(item);
+              }}
               data-testid="story-post"
               className="mt-8 block w-full border px-5 py-4 text-center text-[10px] uppercase tracking-[0.3em] text-paper"
               style={{ borderColor: "rgba(255,255,255,.55)" }}
             >
               View full post
-            </Link>
+            </button>
           )}
 
           <div
