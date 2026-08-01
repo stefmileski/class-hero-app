@@ -104,3 +104,77 @@ proved unreliable.
 | `ui/sheet.tsx` | `shadow-lg` removed |
 | `diary_items` migration | Table, index, grants, RLS |
 | `tests/` | Copied in — **never executed** |
+
+## Role separation (1 Aug)
+
+### The bug that made every role look the same
+
+`useMySchool()` queried `school_members` with `.limit(1).maybeSingle()` and **no
+`user_id` filter**. The SELECT policy on that table is
+`is_school_member(school_id) OR user_id = auth.uid()`, so every member can read
+every row of their school; `.limit(1)` returned whichever row was physically
+first — `ctid (0,1)`, an `admin`. **Every signed-in user resolved as admin.**
+
+That is why canteen staff saw the staff *and* parent tab sets at once, and why
+every persona landed on the teacher/admin dashboard. RLS was never the problem:
+it is a backstop, not a selector. Any query that needs "the current user's row"
+must say so explicitly.
+
+Fixed in `use-my-school.ts` and again, independently, in the
+`_authenticated/route.tsx` guard — the guard does its own filtered lookup
+rather than trusting the hook.
+
+### Navigation
+
+The five-tab bar and the Add sheet are now driven by role. The bar always holds
+five slots with the Add square centred; only the destinations change. Route
+guards redirect a role away from routes it can do nothing with. This is
+convenience, not access control — the database remains the boundary.
+
+### Canteen
+
+New tables, all RLS-enabled, verified by querying `pg_policies` directly:
+
+| Table | Read | Write |
+|---|---|---|
+| `canteen_stock` | canteen staff + admin | same |
+| `canteen_shifts` | any school member (parents see open slots) | canteen staff + admin |
+| `canteen_volunteers` | own row, or staff of that shift's school | insert self; update own or staff |
+
+Helpers `can_manage_canteen()` and `canteen_shift_school()` are
+`SECURITY DEFINER`, matching the existing `is_school_member` / `is_school_staff`
+pattern.
+
+**One hole found and closed.** The `canteen_volunteers` UPDATE policy shipped
+with `USING` but no `WITH CHECK`. USING constrains which rows you may touch, not
+what you may write them to — so a parent could set their own offer to
+`status = 'confirmed'`, self-confirming onto a shift, or rewrite `user_id` to
+forge an offer under another member's name. The replacement lets staff set any
+status and restricts a parent to `offered`/`declined` on their own row.
+
+Proved with a rolled-back probe rather than by reading the expression:
+
+| Attempt | Result |
+|---|---|
+| parent self-confirms | BLOCKED 42501 |
+| parent withdraws | ALLOWED |
+| parent reassigns `user_id` | BLOCKED 42501 |
+| staff confirms | ALLOWED |
+
+`CanteenDashboard` replaces the shared `StaffFeed` for the canteen role:
+counters, a prep list aggregated from today's live order lines, low stock with
+an inline stepper, today's roster, and volunteer offers. The Collected counter
+counts `completed`, checked against the real
+`canteen_orders_status_check` constraint rather than assumed.
+
+### Not done
+
+- Uniform still shares the old `StaffFeed`. Its dashboard needs stock, P&L and
+  a second-hand marketplace — none of which are modelled.
+- Admin has no overview, no cross-area role invites, no analytics.
+- The parent feed is not yet the social surface the mockups describe.
+- `canteen_menu_items` carries **both** `price_cents` (integer) and `price`
+  (numeric). `dashboard.tsx` reads `price`; `order-system.tsx` reads
+  `price_cents`. One of them is wrong somewhere. Collapse to `price_cents`.
+- A parent-facing surface to *offer* to volunteer does not exist yet; the
+  staff side can only respond to offers that nothing currently creates.
