@@ -219,3 +219,52 @@ so a school cannot lock itself out of its own administration.
   `price_cents`. One of them is wrong somewhere. Collapse to `price_cents`.
 - A parent-facing surface to *offer* to volunteer does not exist yet; the
   staff side can only respond to offers that nothing currently creates.
+
+## Seed data and messaging (1 Aug, later)
+
+### Messaging was unreachable for parents — my regression
+
+The parent route guard blocks `/schools/$slug`. Messaging lives at
+`/schools/$slug/messages`, which the guard correctly allows — but the school
+page was the *only* thing linking there. Add sheet → Schools → tap school →
+bounced to `/dashboard`. Dead end.
+
+Nothing was wrong in the database: `parent@classhero.test` is a participant in
+2 of 3 conversations and `get_conversations_for_user` is `SECURITY DEFINER`
+joining on participants with no role filter.
+
+Fixed by giving parents, teachers and admins a direct **Messages** row in the
+Add sheet pointing at their own school's slug, and dropping **Schools** from
+the parent sheet — a directory is meaningless to someone with one school, and
+it led only to a page the guard bounces them off.
+
+Audited at the same time: the messages page renders nothing staff-only to a
+parent. `NewConversationDialog` is gated on admin/teacher, there is no delete
+or participant management, and announcement threads (`allow_replies: false`)
+correctly hide the composer.
+
+**Lesson worth generalising.** A guard that blocks a page also severs whatever
+hangs off it. Each role's guard should be walked against what actually links
+where, rather than waiting for the next missing thing to be noticed.
+
+### Seeded
+
+Loaded directly by SQL, not as a migration — this is demo content, not schema:
+
+| Table | Rows |
+|---|---|
+| `uniform_items` | 17 (polos, shorts, skort, tunic, dress, jacket, hats, bags, socks, smock) |
+| `canteen_menu_items` | 31 across Main / Snack / Fruit / Drink |
+| `canteen_stock` | 31, three deliberately below threshold to exercise the oxide low-stock line |
+| `school_events` | 9, spread over the next week |
+
+Canteen rows set **both** `price_cents` and `price` deliberately, because
+`dashboard.tsx` still reads `price` while `order-system.tsx` reads
+`price_cents`. That duplication is being collapsed onto `price_cents` in the
+queued migration, which drops `price`. Seeding forced the decision — there is
+no correct way to load a price into two columns that disagree.
+
+Day-specific mains use the single `weekday` column for now (Pasta Monday,
+Nachos Tuesday, Sushi Wednesday, Butter Chicken Thursday, Fish & Chips Friday).
+The queued migration converts `weekday` → `weekdays smallint[]`, mapping null
+to `{1,2,3,4,5}`, so these survive and can then be made genuinely multi-day.
