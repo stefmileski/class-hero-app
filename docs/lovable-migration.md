@@ -268,3 +268,54 @@ Day-specific mains use the single `weekday` column for now (Pasta Monday,
 Nachos Tuesday, Sushi Wednesday, Butter Chicken Thursday, Fish & Chips Friday).
 The queued migration converts `weekday` → `weekdays smallint[]`, mapping null
 to `{1,2,3,4,5}`, so these survive and can then be made genuinely multi-day.
+
+## Posts, and the canteen expand/contract (1 Aug, later still)
+
+### Posts
+
+`posts.title`, `posts.share_as_story` and `messages.post_id` added. New route
+`posts.$id.tsx`; composer gained a **Write a post** mode alongside the existing
+newsletter parse.
+
+Verified against the real policies rather than the agent's description:
+
+| Policy | Expression |
+|---|---|
+| `posts` SELECT | `can_view_post(id)` |
+| `posts` INSERT | `author_id = auth.uid() AND ((audience='class' AND class_id IS NOT NULL AND has_class_role(class_id,'teacher')) OR has_school_role(school_id,'admin'))` |
+
+Because SELECT is `can_view_post(id)`, a post shared into a chat cannot widen
+its own audience — a viewer without access simply gets no row, and the page
+renders "This post isn't available to you" rather than leaking the title.
+
+**Parents cannot create posts.** The INSERT policy admits only class teachers
+(to their own class) and school admins (to the school). The composer mirrors
+this exactly — `canPost = isAdmin || teachingClasses.length > 0` — and a parent
+sees an explanation plus the newsletter path, rather than a control that fails.
+Whether parents *should* be able to post is a product decision, not a bug.
+
+One sharp catch in the implementation worth keeping: the insert mints its own
+`crypto.randomUUID()` and deliberately does **not** use `RETURNING`.
+`can_view_post` is STABLE and cannot see the row mid-insert, so asking
+PostgREST for the representation would trip the SELECT policy on a row the
+author is perfectly entitled to create.
+
+### Canteen — expand / migrate / contract
+
+Schema applied directly by SQL at zero Lovable credits:
+
+- `weekdays smallint[]` added and backfilled — 26 rows `{1,2,3,4,5}`, 5
+  single-day, none empty.
+- `price_cents` reconciled against `price`: no nulls, no disagreement, so
+  moving readers onto `price_cents` is visually a no-op.
+
+`weekday` and `price` are **deliberately still present**. Dropping them before
+the code stops reading them would break `dashboard.tsx`'s specials query at
+runtime — it is a string inside a Supabase call, so TypeScript would not catch
+it. Contract step happens after the UI change lands.
+
+> **Credit policy.** Migrations, seeding, RLS work and all verification go
+> through `query_database` and `read_file`, which cost nothing. The Lovable
+> agent is used only to write components and routes. The permission classifier
+> intermittently blocks statements — including, once, a plain `SELECT` — so
+> keep each statement small and single-purpose.
