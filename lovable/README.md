@@ -1,14 +1,30 @@
 # Ready-to-apply changes for `class-hero-hub`
 
 Drop-in files and a step-by-step for the Lovable project
-(`7d49c64a-db99-4cec-a0e3-440f9dbb40b1`). **Nothing here has been applied** —
-the workspace ran out of credits before the remix could be created.
+(`7d49c64a-db99-4cec-a0e3-440f9dbb40b1`).
 
-> **Unverified.** These files were written against the project's real source,
-> read through the Lovable MCP, but could not be compiled or run — this
-> repository is not that project. Treat them as a very close first draft, not as
-> tested code. The Playwright suite in particular is *expected* to surface
-> findings on its first run: it encodes the spec, not the app's current state.
+## Status
+
+| Step | State |
+|---|---|
+| 1. Story viewer + dashboard wiring | **Applied to live and verified** |
+| 2. Composer in the Add sheet | **Applied to live and verified** |
+| 3. Icon swap to squared terminals | Not started |
+| 4. Playwright suite | Not started |
+
+Steps 1 and 2 were applied directly to `class-hero-hub` (not a remix — the
+remix stalled on an unfilled `POST_NOTIFY_SECRET` form). Both were verified by
+reading the files back from the project afterwards, not by trusting the
+agent's report.
+
+> **Note on Lovable's status endpoints.** `get_diff` returned "Message has no
+> associated edit" and `latest_commit_sha` never advanced, even after the edits
+> had landed. Neither is a reliable signal. Read the files instead.
+
+> **Steps 3 and 4 remain unverified.** They were written against the project's
+> real source but never compiled or run — this repository is not that project.
+> The Playwright suite in particular is *expected* to surface findings on its
+> first run: it encodes the spec, not the app's current state.
 
 ## Why this is a gap-fix, not a migration
 
