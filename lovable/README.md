@@ -42,6 +42,28 @@ files back from the project afterwards rather than trusting the agent's report.
   design-system spec filters on it — the dev tool is exempted by marking it as
   a dev tool, not by weakening the assertion.
 
+## Pending — story viewer must cover the chrome
+
+**Not yet applied to live.** The Lovable connector dropped mid-session; this is
+staged and type-checked, waiting to be sent.
+
+The viewer rendered *inside* AppShell's `<main>`, pinned `top: 56` so it
+deliberately started below the header, and the tab bar showed through beneath
+it. Two causes, both fixed in `src/components/story-viewer.tsx`:
+
+1. **`top: 56` was intentional but wrong** — the curtain is meant to cover
+   everything, not sit in the content well. Now `inset-0`, with
+   `env(safe-area-inset-*)` padding so the notch and home indicator stay clear.
+2. **`position: fixed` wasn't resolving to the viewport.** `<main>` carries
+   `u-screen-enter`, an animation that makes it a containing block, so a fixed
+   child resolves against `<main>` rather than the viewport — which is why the
+   overlay stopped short of the tab bar even at `bottom: 0`. Fixed by
+   portalling the overlay to `document.body`, which also immunises it against
+   any transform or filter an ancestor grows later.
+
+Also raised `z-50` → `z-[100]` (the sticky header and tab bar are `z-20`),
+added `aria-modal="true"`, and locked body scroll while the curtain is up.
+
 ## Why this is a gap-fix, not a migration
 
 The design system has already been applied to `class-hero-hub`. Its

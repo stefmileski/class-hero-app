@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Story Viewer — signature surface of the monochrome redesign.
@@ -181,6 +182,15 @@ export function StoryViewer({
     return () => document.removeEventListener("keydown", key);
   }, [onClose, advance]);
 
+  // The feed must not scroll underneath the curtain while it's up.
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
   const accent = ACCENTS[item?.accent ?? "neutral"];
 
   const pointerDown = (e: React.PointerEvent) => {
@@ -211,19 +221,26 @@ export function StoryViewer({
 
   if (!group || !item) return null;
 
-  return (
+  // Portalled to <body>. The viewer lives inside AppShell's <main>, whose
+  // `u-screen-enter` animation makes that element a containing block — a
+  // `position: fixed` child then resolves against <main>, not the viewport, so
+  // the curtain stopped short of the tab bar. The portal escapes that, and any
+  // other transform/filter an ancestor might grow later.
+  const overlay = (
     <div
-      className="fixed inset-0 z-50"
+      className="fixed inset-0 z-[100]"
       role="dialog"
+      aria-modal="true"
       aria-label={`Stories — ${group.author}`}
       data-testid="story"
       style={{ background: "rgba(0,0,0,.4)" }}
     >
       <div
-        className="absolute inset-x-0 bottom-0 flex flex-col overflow-hidden bg-ink text-paper"
+        className="absolute inset-0 flex flex-col overflow-hidden bg-ink text-paper"
         style={{
-          top: 56,
           animation: "ch-curtain 380ms cubic-bezier(.2,.7,.2,1) both",
+          paddingTop: "env(safe-area-inset-top)",
+          paddingBottom: "env(safe-area-inset-bottom)",
         }}
         onPointerDown={pointerDown}
         onPointerUp={pointerUp}
@@ -362,6 +379,12 @@ export function StoryViewer({
       </div>
     </div>
   );
+
+  // `_authenticated` renders with ssr: false, but guard anyway so this can be
+  // reused on a server-rendered route without exploding on `document`.
+  return typeof document === "undefined"
+    ? overlay
+    : createPortal(overlay, document.body);
 }
 
 /** Stories rail — 58px bone circles with Bodoni monograms. */
