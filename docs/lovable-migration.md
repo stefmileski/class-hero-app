@@ -81,5 +81,26 @@ the token system; anything further is a design decision, not a port.
   double-ring circles from the Profile design.
 - The Community segmented control and the designed feed post layouts are not
   built as specified.
-- `onAddToDiary` in the new composer closes without persisting; wiring it to
-  `schedule_items` or `school_events` is a separate decision.
+
+**Closed since:** `onAddToDiary` now persists. Rather than overload
+`schedule_items` (weekday-bound) or `school_events` (school-scoped, and a
+parent can't write them), the composer writes to a new `diary_items` table —
+per-user, RLS'd on `user_id = auth.uid()`, undated — and the Tomorrow sheet
+reads it alongside the derived rows.
+
+## Verified state of the live app
+
+Every change below was confirmed by reading the file back from the project,
+not by trusting the agent's report — `get_diff` and `latest_commit_sha` both
+proved unreliable.
+
+| Area | State |
+|---|---|
+| `story-viewer.tsx` | Back-at-start bug fixed; `hasPost`/`onOpenPost`; inline accent; short rail labels; 13 `data-testid` hooks |
+| `composer.tsx` | New — local `detect()` over DATE/MONEY/TIME |
+| `icons.tsx` | New — 1px strokes, squared terminals, 22×22 |
+| `app-shell.tsx` | Composer leads the Add sheet; flat `bg-paper`; `saveItems` mutation |
+| `dashboard.tsx` | Group labels; `diaryItems` query; diary rows outside the weekday guard |
+| `ui/sheet.tsx` | `shadow-lg` removed |
+| `diary_items` migration | Table, index, grants, RLS |
+| `tests/` | Copied in — **never executed** |

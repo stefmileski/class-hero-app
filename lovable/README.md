@@ -9,22 +9,38 @@ Drop-in files and a step-by-step for the Lovable project
 |---|---|
 | 1. Story viewer + dashboard wiring | **Applied to live and verified** |
 | 2. Composer in the Add sheet | **Applied to live and verified** |
-| 3. Icon swap to squared terminals | Not started |
-| 4. Playwright suite | Not started |
+| 3. Icon swap to squared terminals | **Applied to live and verified** |
+| 4. Playwright suite | **Copied into the project — never run** |
+| 5. Composer persistence (`diary_items`) | **Applied to live and verified** |
+| 6. Design-system fixes (sheet shadow, header blur) | **Applied to live and verified** |
 
-Steps 1 and 2 were applied directly to `class-hero-hub` (not a remix — the
-remix stalled on an unfilled `POST_NOTIFY_SECRET` form). Both were verified by
-reading the files back from the project afterwards, not by trusting the
-agent's report.
+Everything was applied directly to `class-hero-hub` (not a remix — the remix
+stalled on an unfilled `POST_NOTIFY_SECRET` form), and verified by reading the
+files back from the project afterwards rather than trusting the agent's report.
 
 > **Note on Lovable's status endpoints.** `get_diff` returned "Message has no
 > associated edit" and `latest_commit_sha` never advanced, even after the edits
 > had landed. Neither is a reliable signal. Read the files instead.
 
-> **Steps 3 and 4 remain unverified.** They were written against the project's
-> real source but never compiled or run — this repository is not that project.
-> The Playwright suite in particular is *expected* to surface findings on its
-> first run: it encodes the spec, not the app's current state.
+> **The suite has still never been executed.** It is copied into the project
+> but nothing in this container can run it against a live Supabase-backed app.
+> Expect its first run to surface findings: it encodes the spec, not the app's
+> current state. Do not run `consent.spec.ts` against production — it writes
+> real `photo_consent` values.
+
+## What landed beyond the original four steps
+
+- **`diary_items`** — table, index, grants and an RLS policy
+  (`user_id = auth.uid()`), a `saveItems` mutation in `app-shell.tsx`, and a
+  `diaryItems` query feeding the Tomorrow sheet. The composer now persists.
+- **Diary rows sit outside the `tomorrowWeekday <= 5` guard**, so a pasted item
+  survives into a weekend, and the Tomorrow entry label shows the count rather
+  than "Weekend" whenever rows exist.
+- **`sheetVariants` lost its `shadow-lg`**; the header and tab bar dropped
+  `bg-paper/90 backdrop-blur` for flat `bg-paper`.
+- **`dev-role-switcher.tsx` carries `data-dev-tool="true"`** and the
+  design-system spec filters on it — the dev tool is exempted by marking it as
+  a dev tool, not by weakening the assertion.
 
 ## Why this is a gap-fix, not a migration
 
@@ -155,10 +171,9 @@ silenced assertion:
 
 ## Applying it
 
-Once credits are restored, the cheapest path is one message per step with the
-full file contents pasted in, rather than describing the change and letting the
-agent iterate. Use `plan_mode=true` for Step 2, since it touches shell
-structure.
+Already applied. Kept here as the record of what changed and why.
 
-Do it on a **remix**, compare against the live app, and apply to
-`class-hero-hub` only once it's approved.
+If you send further changes: one message per step with the full file contents
+pasted in is far cheaper than describing the change and letting the agent
+iterate, and `plan_mode=true` is worth it for anything touching shell
+structure. Verify by reading the files back — the status endpoints lie.
