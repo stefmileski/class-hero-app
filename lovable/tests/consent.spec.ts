@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { styleOf } from "./helpers";
 
 const OXIDE = "rgb(138, 43, 43)";
 const FERN = "rgb(47, 93, 74)";
@@ -98,7 +97,6 @@ test.describe("Photo consent", () => {
     test.skip(!(await openVault(page)), "no student with a vault seeded");
     const veil = page.locator(".pointer-events-none").first();
     if (await veil.count()) {
-      expect(await styleOf(page, "story", "pointer-events").catch(() => "none")).toBeDefined();
       await expect(veil).toHaveCSS("pointer-events", "none");
     }
   });
