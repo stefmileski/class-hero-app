@@ -167,12 +167,53 @@ an inline stepper, today's roster, and volunteer offers. The Collected counter
 counts `completed`, checked against the real
 `canteen_orders_status_check` constraint rather than assumed.
 
+### Admin
+
+`AdminDashboard` (`src/components/admin-dashboard.tsx`) splits admin out of
+`TeacherDashboard`; teachers keep theirs unchanged. Counters, attendance with a
+per-class breakdown, budget lines, combined canteen + uniform revenue, role
+management, invitations with copyable `/join/$token` links, and classes.
+
+**`invites` had no SELECT policy.** It carried INSERT, UPDATE and DELETE only.
+RLS denies by default, so an admin could not read back an invite they had just
+created — a pending-invites list would have rendered empty with no error. The
+token flow worked at all only because `get_invite_by_token` and `accept_invite`
+are `SECURITY DEFINER` and bypass RLS entirely. Added a read policy for school
+admins, and for teachers on their own class invites.
+
+New tables, RLS verified by querying `pg_policies`:
+
+| Table | Read | Write |
+|---|---|---|
+| `attendance` | school admin, the class teacher, or the student's parent | admin and class teacher only |
+| `budget_lines` | school admin | school admin |
+
+Helper `student_class()` is `SECURITY DEFINER`, matching the existing pattern.
+Every write policy carries an explicit `WITH CHECK` this time.
+
+Proved with a rolled-back probe (two attendance rows, one parent link, all
+removed afterwards):
+
+| Attempt | Result |
+|---|---|
+| parent reads attendance | 1 of 2 rows — own child only |
+| parent edits another child's row | not visible |
+| parent edits their own child's row | not writable |
+| admin reads attendance | 2 of 2 rows |
+
+Attendance that has not been recorded shows "Not taken yet" rather than zeroes
+— an untaken roll and a roll where every child is absent are different facts
+and must not render identically. Demoting the last remaining admin is refused,
+so a school cannot lock itself out of its own administration.
+
 ### Not done
 
 - Uniform still shares the old `StaffFeed`. Its dashboard needs stock, P&L and
   a second-hand marketplace — none of which are modelled.
-- Admin has no overview, no cross-area role invites, no analytics.
 - The parent feed is not yet the social surface the mockups describe.
+- Nothing yet *writes* attendance — the admin view reads a roll that no teacher
+  screen currently records. The teacher dashboard needs a roll-marking surface
+  before these numbers mean anything.
 - `canteen_menu_items` carries **both** `price_cents` (integer) and `price`
   (numeric). `dashboard.tsx` reads `price`; `order-system.tsx` reads
   `price_cents`. One of them is wrong somewhere. Collapse to `price_cents`.
