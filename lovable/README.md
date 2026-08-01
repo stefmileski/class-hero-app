@@ -42,10 +42,7 @@ files back from the project afterwards rather than trusting the agent's report.
   design-system spec filters on it — the dev tool is exempted by marking it as
   a dev tool, not by weakening the assertion.
 
-## Pending — story viewer must cover the chrome
-
-**Not yet applied to live.** The Lovable connector dropped mid-session; this is
-staged and type-checked, waiting to be sent.
+## Story viewer covers the chrome — applied and verified
 
 The viewer rendered *inside* AppShell's `<main>`, pinned `top: 56` so it
 deliberately started below the header, and the tab bar showed through beneath
@@ -63,6 +60,23 @@ it. Two causes, both fixed in `src/components/story-viewer.tsx`:
 
 Also raised `z-50` → `z-[100]` (the sticky header and tab bar are `z-20`),
 added `aria-modal="true"`, and locked body scroll while the curtain is up.
+
+**Reduced motion was silently broken.** The inline `<style>` carried
+`@media (prefers-reduced-motion:reduce){[data-ch-curtain]{animation:none!important}}`
+but no element had a `data-ch-curtain` attribute, so the rule matched nothing
+and the 380ms translate played for everyone regardless of their device setting.
+Added the attribute to the animated panel. The `!important` was already there,
+which it needs in order to beat the inline `animation`. The card timer is
+deliberately left alone — reduced motion is about vestibular safety, not about
+shortening how long someone gets to read.
+
+**Making `tab` required broke the build.** Adding `validateSearch` to
+`/canteen` and `/uniform` typed `tab` as required, so `StaffFeed`'s bare
+`<Link to={dest}>` stopped compiling — and, worse, the route guard's
+`throw redirect({ to: "/canteen" })` carries no search either, so every guarded
+redirect would have failed at runtime too. Both routes now return
+`{ tab?: string }`, omitting the key when absent, and each page falls back to
+its role default.
 
 ## Why this is a gap-fix, not a migration
 

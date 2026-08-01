@@ -236,6 +236,7 @@ export function StoryViewer({
       style={{ background: "rgba(0,0,0,.4)" }}
     >
       <div
+        data-ch-curtain
         className="absolute inset-0 flex flex-col overflow-hidden bg-ink text-paper"
         style={{
           animation: "ch-curtain 380ms cubic-bezier(.2,.7,.2,1) both",
